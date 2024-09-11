@@ -4,6 +4,9 @@ import sys
 from python_graphql_client import GraphqlClient
 
 
+# If the configured since for the report is blank it will use this.
+DEFAULT_SINCE_CLAUSE = 'SINCE 7 DAYS AGO'
+
 
 REPORT_CONFIGS = [
 
@@ -16,6 +19,12 @@ REPORT_CONFIGS = [
 {
     "name":"top_dashboards",
     "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_dashboardId, dimension_email, dimension_productCapability WHERE dimension_productCapability = 'Dashboards' and dimension_dashboardId IS NOT NULL",
+    "limit": 10,
+    "since": "SINCE 1 day ago"
+},
+{
+    "name":"top_alerts",
+    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_conditionId, dimension_productCapability WHERE dimension_productCapability = 'Alert Conditions'",
     "limit": 10,
     "since": "SINCE 1 day ago"
 },
@@ -71,7 +80,7 @@ def execute_nrql(api_key, account_id, nrql_query):
 
 def run_all_reports(report_config, api_key, account_id):
     for rep in report_config:
-        query = "{} {} LIMIT {}".format(rep["NRQL"], rep["since"], rep["limit"])
+        query = "{} {} LIMIT {}".format(rep["NRQL"], rep["since"] or DEFAULT_SINCE_CLAUSE, rep["limit"])
         print("##########{}".format(rep['name']))
         print("##########{}".format(query))
     
