@@ -13,6 +13,12 @@ TODO: Work on refining the output formatting into a series of CSVs.
 
 Setup a Python3 virtual environment using the provided `requirements.txt` file.
 
+```
+python3 -m venv ./venv
+. ./venv/bin/activate
+pip install -r requirements.txt
+```
+
 
 *The query config example is as follows*
 
