@@ -12,19 +12,19 @@ QUERY_DEFS = [
 },
 {
     "name":"top_dashboards",
-    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_dashboardId, dimension_email, dimension_productCapability WHERE dimension_productCapability = 'Dashboards' and dimension_dashboardId IS NOT NULL",
+    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU WHERE dimension_productCapability = 'Dashboards' and dimension_dashboardId IS NOT NULL FACET dimension_dashboardId, dimension_email, dimension_productCapability",
     "limit": 10,
     "since": "SINCE 1 day ago"
 },
 {
     "name":"top_alerts",
-    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_conditionId, dimension_productCapability WHERE dimension_productCapability = 'Alert Conditions'",
+    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU WHERE dimension_productCapability = 'Alert Conditions' FACET dimension_conditionId, dimension_productCapability",
     "limit": 10,
     "since": "SINCE 1 day ago"
 },
 {
     "name":"top_event_types_dashboards",
-    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_eventTypes,dimension_dashboardId  WHERE dimension_productCapability = 'Dashboards' and dimension_dashboardId IS NOT NULL",
+    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU WHERE dimension_productCapability = 'Dashboards' and dimension_dashboardId IS NOT NULL FACET dimension_eventTypes,dimension_dashboardId",
     "limit": 10,
     "since": "SINCE 1 day ago"
 },
@@ -36,13 +36,13 @@ QUERY_DEFS = [
 },
 {
     "name":"top_users_by_cap",
-    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_email, dimension_productCapability where dimension_email is not NULL",
+    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU where dimension_email is not NULL FACET dimension_email, dimension_productCapability",
     "limit": 10,
     "since": "SINCE 1 day ago"
 },
 {
     "name":"top_users_all_caps",
-    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU FACET dimension_email where dimension_email is not NULL",
+    "NRQL": "FROM NrComputeUsage SELECT sum(usage) AS CCU where dimension_email is not NULL FACET dimension_email",
     "limit": 10,
     "since": "SINCE 1 day ago"
 },
